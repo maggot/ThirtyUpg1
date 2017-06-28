@@ -9,17 +9,25 @@ import java.util.Random;
 public class Die {
     private int value;
     private Random randomGen = new Random();
+    private boolean savedDie = false;
 
     public Die(){
         value = 1;
     }
 
-    public int rollDie(){
-        value = 1 + randomGen.nextInt(6);
-        return value;
+    public void rollDie(){
+        if(!savedDie) value = 1 + randomGen.nextInt(6);
     }
 
     public int getValue(){
         return value;
+    }
+
+    public void setSavedDie(boolean state){
+        savedDie = state;
+    }
+
+    public boolean getSavedDie(){
+        return savedDie;
     }
 }

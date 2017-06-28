@@ -28,7 +28,17 @@
             layout="@layout/dice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:id="@+id/include2" />
+
+        <Button
+            android:id="@+id/roll_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/include2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="59dp"
+            android:text="Roll Dice" />
 
     </RelativeLayout>
 
