@@ -25,20 +25,31 @@
         android:layout_height="match_parent">
 
         <include
+            android:id="@+id/include2"
             layout="@layout/dice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:id="@+id/include2" />
+            android:layout_centerVertical="true" />
 
         <Button
             android:id="@+id/roll_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="80dp"
+            android:text="Roll Dice"
+            android:layout_alignBaseline="@+id/next_round"
+            android:layout_alignBottom="@+id/next_round"
+            android:layout_alignParentEnd="true" />
+
+        <Button
+            android:id="@+id/next_round"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/include2"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="59dp"
-            android:text="Roll Dice" />
+            android:layout_marginEnd="60dp"
+            android:layout_marginTop="37dp"
+            android:layout_toStartOf="@+id/roll_btn"
+            android:text="Next Round" />
 
     </RelativeLayout>
 

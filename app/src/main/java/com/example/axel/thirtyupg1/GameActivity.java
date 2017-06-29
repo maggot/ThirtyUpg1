@@ -12,7 +12,7 @@ public class GameActivity extends AppCompatActivity {
 
     private GameHandler gh;
     private int[] dice, white, grey, red;
-    private Button rollBtn;
+    private Button rollBtn, nxtRoundBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +20,8 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         gh = new GameHandler();
+
+        //nxtRoundBtn.setEnabled(false);
 
         dice = new int [] {R.id.die_11, R.id.die_12, R.id.die_13, R.id.die_21, R.id.die_22, R.id.die_23, };
 
@@ -35,7 +37,7 @@ public class GameActivity extends AppCompatActivity {
             dieImg.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view){
-                    gh.setDieState(finalI,true);
+                    gh.setDieState(finalI);
                     dieRefresh();
                 }
             });
@@ -47,6 +49,20 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View view){
                 gh.rollDice();
                 dieRefresh();
+                if(gh.getNumRolls() >= 3){
+                    rollBtn.setEnabled(false);
+                    nxtRoundBtn.setEnabled(true);
+                }
+            }
+        });
+
+        nxtRoundBtn = (Button) findViewById(R.id.next_round);
+        nxtRoundBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                //Count up the score
+                newGame();
+                nxtRoundBtn.setEnabled(false);
             }
         });
 
@@ -70,6 +86,8 @@ public class GameActivity extends AppCompatActivity {
         gh.resetDice();
         gh.rollDice();
         dieRefresh();
+        gh.setNumRolls();
+        rollBtn.setEnabled(true);
     }
 
     @Override

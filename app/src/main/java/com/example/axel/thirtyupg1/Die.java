@@ -23,8 +23,8 @@ public class Die {
         return value;
     }
 
-    public void setSavedDie(boolean state){
-        savedDie = state;
+    public void setSavedDie(){
+        savedDie = !savedDie;
     }
 
     public boolean getSavedDie(){
