@@ -46,10 +46,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/include2"
-            android:layout_marginEnd="60dp"
+            android:layout_marginEnd="30dp"
             android:layout_marginTop="37dp"
             android:layout_toStartOf="@+id/roll_btn"
             android:text="Next Round" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/include2"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="17dp" />
 
     </RelativeLayout>
 

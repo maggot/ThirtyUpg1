@@ -1,12 +1,17 @@
 package com.example.axel.thirtyupg1;
 
+import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -29,6 +34,12 @@ public class GameActivity extends AppCompatActivity {
         grey = new int[] {R.drawable.grey1, R.drawable.grey2, R.drawable.grey3, R.drawable.grey4, R.drawable.grey5, R.drawable.grey6};
         red = new int[] {R.drawable.red1, R.drawable.red2, R.drawable.red3, R.drawable.red4, R.drawable.red5, R.drawable.red6};
 
+        Resources res = getResources();
+        String[] spinnerOptions = res.getStringArray(R.array.spinner_options);
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        ArrayAdapter<String> spinAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new ArrayList<>(Arrays.asList(spinnerOptions)));
+        spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinAdapter);
 
         for(int i = 0; i < 6; i++){
             ImageView dieImg = (ImageView) findViewById(dice[i]);
@@ -61,8 +72,10 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 //Count up the score
-                newGame();
-                nxtRoundBtn.setEnabled(false);
+                Intent i = new Intent(GameActivity.this, Scoring.class);
+                startActivity(i);
+//                newGame();
+//                nxtRoundBtn.setEnabled(false);
             }
         });
 
@@ -90,25 +103,4 @@ public class GameActivity extends AppCompatActivity {
         rollBtn.setEnabled(true);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

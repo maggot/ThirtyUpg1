@@ -6,28 +6,28 @@ import java.util.Random;
  * Created by Axel on 6/27/2017.
  */
 
-public class Die {
+class Die {
     private int value;
     private Random randomGen = new Random();
     private boolean savedDie = false;
 
-    public Die(){
+    Die(){
         value = 1;
     }
 
-    public void rollDie(){
+    void rollDie(){
         if(!savedDie) value = 1 + randomGen.nextInt(6);
     }
 
-    public int getValue(){
+    int getValue(){
         return value;
     }
 
-    public void setSavedDie(){
+    void setSavedDie(){
         savedDie = !savedDie;
     }
 
-    public boolean getSavedDie(){
+    boolean getSavedDie(){
         return savedDie;
     }
 }
