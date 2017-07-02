@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +19,8 @@ public class GameActivity extends AppCompatActivity {
     private GameHandler gh;
     private int[] dice, white, grey, red;
     private Button rollBtn, nxtRoundBtn;
+    private TextView scoreView ;
+    private TextView numRollsView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +28,7 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         gh = new GameHandler();
-
-        //nxtRoundBtn.setEnabled(false);
+        numRollsView = (TextView) findViewById(R.id.numRolls_view);
 
         dice = new int [] {R.id.die_11, R.id.die_12, R.id.die_13, R.id.die_21, R.id.die_22, R.id.die_23, };
 
@@ -60,6 +62,8 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View view){
                 gh.rollDice();
                 dieRefresh();
+                numRollsView.setText(Integer.toString(3-gh.getNumRolls())); //should be num rolls
+
                 if(gh.getNumRolls() >= 3){
                     rollBtn.setEnabled(false);
                     nxtRoundBtn.setEnabled(true);
@@ -80,6 +84,7 @@ public class GameActivity extends AppCompatActivity {
         });
 
         newGame();
+        nxtRoundBtn.setEnabled(false);
     }
 
     private void dieRefresh(){

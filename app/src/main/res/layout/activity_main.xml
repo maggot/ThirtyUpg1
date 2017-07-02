@@ -6,20 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.axel.thirtyupg1.GameActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </android.support.design.widget.AppBarLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -35,11 +21,11 @@
             android:id="@+id/roll_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="80dp"
-            android:text="Roll Dice"
             android:layout_alignBaseline="@+id/next_round"
             android:layout_alignBottom="@+id/next_round"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="80dp"
+            android:text="Roll Dice" />
 
         <Button
             android:id="@+id/next_round"
@@ -58,6 +44,23 @@
             android:layout_above="@+id/include2"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="17dp" />
+
+        <TextView
+            android:id="@+id/score_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/spinner"
+            android:layout_alignEnd="@+id/roll_btn"
+            android:layout_marginBottom="50dp"
+            android:text="Score:" />
+
+        <TextView
+            android:id="@+id/numRolls_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/next_round"
+            android:layout_alignTop="@+id/score_view"
+            android:text="Rolls Left:" />
 
     </RelativeLayout>
 
