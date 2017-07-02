@@ -3,6 +3,7 @@
     <string name="action_settings">Settings</string>
 
     <string-array name="spinner_options">
+        <item>Select Scoring</item>
         <item>Low</item>
         <item>4</item>
         <item>5</item>

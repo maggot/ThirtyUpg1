@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,27 +22,36 @@ public class GameActivity extends AppCompatActivity {
     private Button rollBtn, nxtRoundBtn;
     private TextView scoreView ;
     private TextView numRollsView;
+    private Spinner spinner;
+    private int score = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Initiates an instance of gameHandler
         gh = new GameHandler();
-        numRollsView = (TextView) findViewById(R.id.numRolls_view);
 
+        //Fetches text ImageView IDs
+        numRollsView = (TextView) findViewById(R.id.numRolls_view);
+        scoreView = (TextView) findViewById(R.id.score_view);
+
+        //Fetching die ImageViews IDs
         dice = new int [] {R.id.die_11, R.id.die_12, R.id.die_13, R.id.die_21, R.id.die_22, R.id.die_23, };
 
+        //Fetching die image resources
         white = new int[] {R.drawable.white1, R.drawable.white2, R.drawable.white3, R.drawable.white4, R.drawable.white5, R.drawable.white6};
         grey = new int[] {R.drawable.grey1, R.drawable.grey2, R.drawable.grey3, R.drawable.grey4, R.drawable.grey5, R.drawable.grey6};
         red = new int[] {R.drawable.red1, R.drawable.red2, R.drawable.red3, R.drawable.red4, R.drawable.red5, R.drawable.red6};
 
         Resources res = getResources();
         String[] spinnerOptions = res.getStringArray(R.array.spinner_options);
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        spinner = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<String> spinAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new ArrayList<>(Arrays.asList(spinnerOptions)));
         spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinAdapter);
+
 
         for(int i = 0; i < 6; i++){
             ImageView dieImg = (ImageView) findViewById(dice[i]);
@@ -50,6 +60,7 @@ public class GameActivity extends AppCompatActivity {
             dieImg.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view){
+                    if(!gh.gameOn) return;
                     gh.setDieState(finalI);
                     dieRefresh();
                 }
@@ -60,13 +71,16 @@ public class GameActivity extends AppCompatActivity {
         rollBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                gh.setGameOn(true);
                 gh.rollDice();
                 dieRefresh();
-                numRollsView.setText(Integer.toString(3-gh.getNumRolls())); //should be num rolls
+                numRollsView.setText(Integer.toString(3-gh.getNumRolls()) + " left"); //should be num rolls
 
                 if(gh.getNumRolls() >= 3){
+                    Toast.makeText(GameActivity.this, "Select dice you want to score", Toast.LENGTH_SHORT).show();
                     rollBtn.setEnabled(false);
                     nxtRoundBtn.setEnabled(true);
+                    spinner.setEnabled(true);
                 }
             }
         });
@@ -75,16 +89,18 @@ public class GameActivity extends AppCompatActivity {
         nxtRoundBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                //Count up the score
-                Intent i = new Intent(GameActivity.this, Scoring.class);
-                startActivity(i);
-//                newGame();
-//                nxtRoundBtn.setEnabled(false);
+                if(spinner.getSelectedItemPosition() == 0){
+                    Toast.makeText(GameActivity.this, "Please choose an option in the drop-down menu", Toast.LENGTH_SHORT).show();
+                } else {
+                    //Count up the score
+                    score += gh.calculateScore(spinner.getSelectedItem().toString());
+                    scoreView.setText("Score: " + Integer.toString(score));
+                    newGame();
+                }
             }
         });
 
         newGame();
-        nxtRoundBtn.setEnabled(false);
     }
 
     private void dieRefresh(){
@@ -101,11 +117,20 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void newGame(){
+        gh.setGameOn(false);
         gh.resetDice();
-        gh.rollDice();
         dieRefresh();
         gh.setNumRolls();
         rollBtn.setEnabled(true);
+        nxtRoundBtn.setEnabled(false);
+        numRollsView.setText(String.format("%d left", 3 - gh.getNumRolls()));
+        spinner.setSelection(0);
+        spinner.setEnabled(false);
+    }
+
+    public void showScoreboard(){
+        Intent i = new Intent(GameActivity.this, Scoring.class);
+        startActivity(i);
     }
 
 }
