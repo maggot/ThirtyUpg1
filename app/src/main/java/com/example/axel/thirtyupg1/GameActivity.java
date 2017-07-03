@@ -23,6 +23,7 @@ public class GameActivity extends AppCompatActivity {
     private TextView scoreView ;
     private TextView numRollsView;
     private Spinner spinner;
+    private ArrayAdapter<String> spinAdapter;
     private int score = 0;
 
     @Override
@@ -48,7 +49,7 @@ public class GameActivity extends AppCompatActivity {
         Resources res = getResources();
         String[] spinnerOptions = res.getStringArray(R.array.spinner_options);
         spinner = (Spinner) findViewById(R.id.spinner);
-        ArrayAdapter<String> spinAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new ArrayList<>(Arrays.asList(spinnerOptions)));
+        spinAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new ArrayList<>(Arrays.asList(spinnerOptions)));
         spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinAdapter);
 
@@ -90,11 +91,14 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 if(spinner.getSelectedItemPosition() == 0){
-                    Toast.makeText(GameActivity.this, "Please choose an option in the drop-down menu", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GameActivity.this, "Please choose an option in the drop-down menu" + spinner.getAdapter().getCount(), Toast.LENGTH_SHORT).show();
                 } else {
                     //Count up the score
                     score += gh.calculateScore(spinner.getSelectedItem().toString());
                     scoreView.setText("Score: " + Integer.toString(score));
+
+                    spinAdapter.remove((String) spinner.getSelectedItem());
+                    spinAdapter.notifyDataSetChanged();
                     newGame();
                 }
             }
@@ -117,6 +121,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void newGame(){
+        if(spinner.getAdapter().getCount() == 9) showScoreboard();
+
         gh.setGameOn(false);
         gh.resetDice();
         dieRefresh();
@@ -130,6 +136,7 @@ public class GameActivity extends AppCompatActivity {
 
     public void showScoreboard(){
         Intent i = new Intent(GameActivity.this, Scoring.class);
+        i.putExtra("final_score", score);
         startActivity(i);
     }
 
