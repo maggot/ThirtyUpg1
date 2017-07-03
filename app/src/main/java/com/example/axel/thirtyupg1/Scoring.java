@@ -22,6 +22,10 @@ public class Scoring extends Activity {
 
         finalScore = (TextView) findViewById(R.id.final_score);
 
+        //TODO: Populate "table" on new activity
+        //TODO: Add "new game" functionallity on button
+        //TODO: Comment code
+
         allScores = new TextView[] {
                 endScore1 = (TextView) findViewById(R.id.end_score1),
                 endScore2 = (TextView) findViewById(R.id.end_score2),
