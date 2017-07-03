@@ -121,7 +121,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void newGame(){
-        if(spinner.getAdapter().getCount() == 9) showScoreboard();
+        if(spinner.getAdapter().getCount() == 1) showScoreboard();
 
         gh.setGameOn(false);
         gh.resetDice();
