@@ -30,6 +30,9 @@ public class GameActivity extends AppCompatActivity {
     private ArrayAdapter<String> spinAdapter;
     private int score = 0;
 
+    //Part of my unsuccessful attempt at recovering score data..
+//    private String prev_score_key = "scoreValKey";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +44,16 @@ public class GameActivity extends AppCompatActivity {
         //Fetches text ImageView IDs
         numRollsView = (TextView) findViewById(R.id.numRolls_view);
         scoreView = (TextView) findViewById(R.id.score_view);
+
+        //An attempt at recovering the score data once an activity had been recreated.
+        //Yet with the methodology i chose for implementing this task, doing this proved to be a bit hard for me to do since
+        //as far as i know i would have to save and overwrite the objects etc to do implement the functionality fully.
+        //I could not find any comprehensible guides that I could follow for this.
+
+//        if(savedInstanceState != null){
+//            CharSequence savedScore = savedInstanceState.getCharSequence(prev_score_key);
+//            scoreView.setText(savedScore);
+//        }
 
         //Fetching die ImageViews IDs
         dice = new int [] {R.id.die_11, R.id.die_12, R.id.die_13, R.id.die_21, R.id.die_22, R.id.die_23, };
@@ -116,6 +129,16 @@ public class GameActivity extends AppCompatActivity {
 
         newRound();
     }
+
+
+    //Attempt at recovering the score when activity is recreated.
+
+//    @Override
+//    protected void onSaveInstanceState(Bundle outState){
+//        super.onSaveInstanceState(outState);
+//        outState.putCharSequence(prev_score_key, scoreView.getText());
+//
+//    }
 
     //Refresh the images for all dice (grey for selected dice)
     private void dieRefresh(){
