@@ -2,13 +2,13 @@ package com.example.axel.thirtyupg1;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.TextView;
 
 /**
  * Created by Axel on 6/30/2017.
  */
-
 
 public class Scoring extends Activity {
 
@@ -22,10 +22,7 @@ public class Scoring extends Activity {
 
         finalScore = (TextView) findViewById(R.id.final_score);
 
-        //TODO: Populate "table" on new activity
-        //TODO: Add "new game" functionallity on button
-        //TODO: Comment code
-
+        //Array holding all view addresses
         allScores = new TextView[] {
                 endScore1 = (TextView) findViewById(R.id.end_score1),
                 endScore2 = (TextView) findViewById(R.id.end_score2),
@@ -37,9 +34,22 @@ public class Scoring extends Activity {
                 endScore8 = (TextView) findViewById(R.id.end_score8),
                 endScore9 = (TextView) findViewById(R.id.end_score9),
                 endScore10 = (TextView) findViewById(R.id.end_score10),
+                finalScore = (TextView) findViewById(R.id.final_score)
         };
 
-        Intent i = getIntent();
-        finalScore.setText(String.valueOf("Total Score: " + i.getIntExtra("final_score", 0)));
+        //Gets the array saved in the intent
+        Intent intent = getIntent();
+        int scrData[] = intent.getIntArrayExtra("total_score");
+
+        //Gets the items otherwise used for the spinner to use on the score display
+        Resources res = getResources();
+        String[] scoringOptions = res.getStringArray(R.array.spinner_options);
+
+        //Putting the score in the corresponding TextView together with "identifiers"
+        for(int i = 0;i < 10; i++){
+            allScores[i].setText((scoringOptions[i+1] + ": " + String.valueOf(scrData[i])));
+        }
+
+        allScores[10].setText(("Total Score : " + String.valueOf(scrData[10])));
     }
 }

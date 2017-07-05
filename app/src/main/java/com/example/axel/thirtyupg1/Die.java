@@ -11,10 +11,12 @@ class Die {
     private Random randomGen = new Random();
     private boolean savedDie = false;
 
+    //The die object is instantiated to 1
     Die(){
         value = 1;
     }
 
+    //Random generator gives the die a new value upon call
     void rollDie(){
         if(!savedDie) value = 1 + randomGen.nextInt(6);
     }
