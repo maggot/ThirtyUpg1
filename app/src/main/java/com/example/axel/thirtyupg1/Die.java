@@ -12,24 +12,28 @@ class Die {
     private boolean savedDie = false;
 
     //The die object is instantiated to 1
-    Die(){
+    Die() {
         value = 1;
     }
 
     //Random generator gives the die a new value upon call
-    void rollDie(){
-        if(!savedDie) value = 1 + randomGen.nextInt(6);
+    void rollDie() {
+        if (!savedDie) value = 1 + randomGen.nextInt(6);
     }
 
-    int getValue(){
+    void setValue(int val) {
+        value = val;
+    }
+
+    int getValue() {
         return value;
     }
 
-    void setSavedDie(){
+    void setSavedDie() {
         savedDie = !savedDie;
     }
 
-    boolean getSavedDie(){
+    boolean getSavedDie() {
         return savedDie;
     }
 }

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">ThirtyUpg1</string>
     <string name="action_settings">Settings</string>
+    <string name="remind_text">Remember to select all, and only, the dice you want to score</string>
 
     <string-array name="spinner_options">
         <item>Select Scoring</item>
