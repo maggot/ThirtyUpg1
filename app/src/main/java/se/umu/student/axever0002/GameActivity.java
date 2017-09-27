@@ -21,12 +21,10 @@ import java.util.Arrays;
  * Created by Axel on 6/26/2017.
  */
 
-/**
- * GameActivity is the main activity of which is started when the app has been launched.
- * GameActivity handles the interface & user input, and communicates with the GameHandler
- * until the game has ended. When the game has ended, GameActivity starts a new activity
- * "Scoring", where data relevant for that activity is passed along.
- */
+//  GameActivity is the main activity of which is started when the app has been launched.
+//  GameActivity handles the interface & user input, and communicates with the GameHandler
+//  until the game has ended. When the game has ended, GameActivity starts a new activity
+//  "Scoring", where data relevant for that activity is passed along.
 
 public class GameActivity extends AppCompatActivity {
 
@@ -48,8 +46,10 @@ public class GameActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             this.gh = savedInstanceState.getParcelable("parcel");
             rebuildGUI();
-            spinAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new ArrayList<>(savedInstanceState.getStringArrayList("spinnerItems")));
-            spinner.setSelection(savedInstanceState.getInt("spinnerPos", 0));
+            this.spinAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new ArrayList<>(savedInstanceState.getStringArrayList("spinnerItems")));
+            this.spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            this.spinner.setAdapter(spinAdapter);
+            this.spinner.setSelection(savedInstanceState.getInt("spinnerPos", 0));
         } else {
             //Initiates an instance of gameHandler, create the GUI and start a new game if there are no "old" data.
             gh = new GameHandler();
@@ -203,5 +203,4 @@ public class GameActivity extends AppCompatActivity {
         i.putExtra("total_score", gh.returnScoreList());    //add to the intent the list of scoring options with the corresponding game scores
         startActivity(i);
     }
-
 }

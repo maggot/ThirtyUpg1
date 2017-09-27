@@ -6,10 +6,9 @@ import java.util.Random;
  * Created by Axel on 6/27/2017.
  */
 
-/**
- * A Die object to represent the non-graphical side of the dice
- * and is used by the GameHandler
- */
+
+// A Die object to represent the non-graphical side of the dice
+// and is used by the GameHandler
 
 class Die {
     private int value;

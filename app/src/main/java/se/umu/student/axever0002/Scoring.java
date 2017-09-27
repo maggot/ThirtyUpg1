@@ -14,13 +14,12 @@ import com.example.axel.thirtyupg1.R;
  * Created by Axel on 6/30/2017.
  */
 
-/**
- * Scoring is the second activity of this project. GameActivity calls "Scoring" with an
- * intent containing scoring data, and where a new screen is presented with scoring
- * data from the game that has just ended. On the left side of the
- * items are the scoring identifiers whereas on the right side is what the user scored
- * on that specific scoring option.
- */
+
+//  Scoring is the second activity of this project. GameActivity calls "Scoring" with an
+//  intent containing scoring data, and where a new screen is presented with scoring
+//  data from the game that has just ended. On the left side of the
+//  items are the scoring identifiers whereas on the right side is what the user scored
+//  on that specific scoring option.
 
 public class Scoring extends Activity {
 
@@ -87,5 +86,8 @@ public class Scoring extends Activity {
     //Prevents the user from using the "back-button"
     @Override
     public void onBackPressed() {
+        Intent i = new Intent(Scoring.this, GameActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);    //Flag the intent with instructions to start a fresh game.
+        startActivity(i);
     }
 }

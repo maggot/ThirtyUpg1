@@ -7,12 +7,11 @@ import android.os.Parcelable;
  * Created by Axel on 6/28/2017.
  */
 
-/**
- * GameHandler handles the state of the game, such as calculations
- * of score, management of the dice data and score.
- * GH is a custom object that implements parcelable since it needs to
- * be able to be stored in "savedInstanceState" when the main activity is recreated.
- */
+
+//  GameHandler handles the state of the game, such as calculations
+//  of score, management of the dice data and score.
+//  GH is a custom object that implements parcelable since it needs to
+//  be able to be stored in "savedInstanceState" when the main activity is recreated.
 
 class GameHandler implements Parcelable {
 
@@ -121,9 +120,8 @@ class GameHandler implements Parcelable {
         this.score += score;        //Add this methods collected score to the player's score.
     }
 
-    /**
-     * Following is (mostly) auto-generated code as part of implementing parcelable.
-     */
+
+    //  Following is (mostly) auto-generated code as part of implementing parcelable.
 
     @Override
     public int describeContents() {
